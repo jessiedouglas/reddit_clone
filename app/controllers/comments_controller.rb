@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def new
     @post = Post.find(params[:post_id])
+    @comment =
     @comment = Comment.new
     render :new
   end
@@ -20,6 +21,12 @@ class CommentsController < ApplicationController
   def show
     @comment = Comment.find(params[:id])
     render :show
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.content = "[deleted]"
+    redirect_to post_url(@comment.post)
   end
 
   private

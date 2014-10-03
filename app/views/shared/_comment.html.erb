@@ -1,9 +1,11 @@
+<% unless all_comments.none? {|comment2| comment2.parent_comment == comment } %>
 <ul>
-  <% @all_comments.each do |child_comment| %>
+  <% all_comments.each do |child_comment| %>
 		<% next unless child_comment.parent_comment_id == comment.id %>
   <br>
-	<li><a href="<%= comment_url(child_comment) %>"><%= child_comment.content %></a><br>
-    -----posted by <%= child_comment.author.username %> at <%= child_comment.created_at %><br>
-		<%= render partial: "shared/comment", locals: {comment: child_comment} %></li>
+	<li><%= child_comment.content %><br>
+    -----posted by <%= child_comment.author.username %> at <%= child_comment.created_at %><%= delete_comment(child_comment) %><br>
+		<%= render partial: "shared/comment", locals: {comment: child_comment, all_comments: all_comments} %></li>
   <% end %>
 </ul>
+<% end %>

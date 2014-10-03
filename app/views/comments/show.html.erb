@@ -3,7 +3,7 @@
 	<br>
 	-----posted by <%= @comment.author.username %> at <%= @comment.created_at %>
 	<br>
-	<%= render partial: 'shared/comment', locals: {comment: @comment} %>
+	<%= render partial: 'shared/comment', locals: {comment: @comment, all_comments: @all_comments} %>
 
 <a href="<%= post_url(@comment.post) %>">Back</a>
 

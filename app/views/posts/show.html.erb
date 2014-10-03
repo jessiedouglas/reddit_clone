@@ -17,11 +17,11 @@ Posted by <%= @post.author.username %> at <%= @post.created_at %>
 <ul>
 	<% @all_comments.each do |comment| %>
 		<% next unless comment.parent_comment_id.nil? %>
-			<li><a href="<%= comment_url(comment) %>"><%= comment.content %></a>
+			<li><%= comment.content %>
 				<br>
-				-----posted by <%= comment.author.username %> at <%= comment.created_at %>
+				-----posted by <%= comment.author.username %> at <%= comment.created_at %><%= delete_comment(comment) %>
 				<br>
-				<%= render partial: "shared/comment", locals: {comment: comment} %>
+				<%= render partial: "shared/comment", locals: {comment: comment, all_comments: @all_comments} %>
 
 			</li>
 			<br>
