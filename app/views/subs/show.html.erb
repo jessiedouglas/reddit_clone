@@ -1,0 +1,29 @@
+<h1><%= @sub.title %></h1>
+
+<%= render 'shared/errors' %>
+
+<% if current_user == @sub.moderator %>
+	<a href="<%= edit_sub_url(@sub) %>">Edit sub</a>
+
+	<br>
+
+	<%= button_to "Delete sub", sub_url(@sub), method: :delete %>
+<% end %>
+
+<%= @sub.description %>
+
+<br>
+<%= link_to "Create a post!", new_sub_post_url(@sub) %>
+<br>
+<ul>
+	<% @sub.posts.each do |post| %>
+		<li>
+			<% url = post.url.empty? ? post_url(post) : post.url %>
+			<a href="<%= url %>"><%= post.title %></a>
+			<br>
+			<a href="<%= post_url(post) %>">comments</a>
+		</li>
+	<% end %>
+</ul>
+
+<a href="<%= subs_url %>">All subs</a>

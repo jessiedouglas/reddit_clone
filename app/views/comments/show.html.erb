@@ -1,0 +1,22 @@
+<br><br>
+<%= @comment.content %>
+	<br>
+	-----posted by <%= @comment.author.username %> at <%= @comment.created_at %>
+	<br>
+	<%= render partial: 'shared/comment', locals: {comment: @comment} %>
+
+<a href="<%= post_url(@comment.post) %>">Back</a>
+
+<form action="<%= comments_url %>" method="POST">
+	<%= auth_token %>
+	<input type="hidden" name="comment[post_id]" value="<%= @comment.post_id %>">
+	<input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">
+	<label for="comment_content">Enter comment here:</label>
+	<br>
+	<textarea name="comment[content]"	id="comment_content">
+		<%= @comment.content %>
+	</textarea>
+
+	<br>
+	<button>Submit comment</button>
+</form>

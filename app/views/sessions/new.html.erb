@@ -1,0 +1,28 @@
+<h1>Log in!</h1>
+
+<%= render 'shared/errors' %>
+
+<form action="<%= session_url %>" method="POST">
+
+	<%= auth_token %>
+
+	<label for="user_username">Username</label>
+	<input
+		type="text"
+		name="user[username]"
+		id="user_username"
+		value="<%= @user.username %>">
+
+	<br>
+
+	<label for="user_password">Password</label>
+	<input
+		type="password"
+		name="user[password]"
+		id="user_password">
+
+	<br>
+
+	<button>Log in!</button>
+
+</form>

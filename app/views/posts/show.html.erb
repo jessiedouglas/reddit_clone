@@ -1,0 +1,46 @@
+<h1><%= @post.title %></h1>
+
+<%= @post.content %>
+
+<br>
+
+Posted by <%= @post.author.username %> at <%= @post.created_at %>
+
+<br>
+
+<% if current_user == @post.author %>
+	<a href="<%= edit_post_url(@post) %>">Edit post!</a>
+<% end %>
+
+<br>
+
+<ul>
+	<% @all_comments.each do |comment| %>
+		<% next unless comment.parent_comment_id.nil? %>
+			<li><%= comment.content %>
+				<br>
+				-----posted by <%= comment.author.username %> at <%= comment.created_at %>
+				<br>
+				<a href="<%= comment_url(comment) %>">Read more</a>
+				<%= render partial: "shared/comment", locals: {comment: comment} %>
+			</li>
+			<br>
+	<% end %>
+</ul>
+
+<!-- <ul>
+	<% @post.top_level_comments.each do |top_level_comment| %>
+		<li><%= top_level_comment.content %>
+			<br>
+			-----posted by <%= top_level_comment.author.username %> at <%= top_level_comment.created_at %>
+			<br>
+			<a href="<%= comment_url(top_level_comment) %>">Read more</a>
+			<%= render partial: "shared/comment", locals: {comment: top_level_comment} %>
+		</li>
+		<br>
+	<% end %>
+</ul>
+
+<br> -->
+
+<a href="<%= new_post_comment_url(@post) %>">Add a Comment</a>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RedditApp</title>
+</head>
+<body>
+<% if current_user.nil? %>
+	<a href="<%= new_session_url %>">Sign in!</a>
+	<a href="<%= new_user_url %>">Sign up!</a>
+<% else %>
+	Logged in as <a href="<%= user_url(current_user) %>"><%= current_user.username %></a>
+
+	<br>
+	<%= button_to "Log out", session_url, method: :delete %>
+<% end %>
+
+<%= render 'shared/navbar' %>
+
+<%= yield %>
+
+</body>
+</html>

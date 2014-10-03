@@ -1,0 +1,11 @@
+
+<br>
+<ul>
+  <% @all_comments.each do |child_comment| %>
+		<% next unless child_comment.parent_comment_id == comment.id %>
+  <li><a href="<%= comment_url(child_comment) %>"><%= child_comment.content %></a><br>
+    -----posted by <%= child_comment.author.username %> at <%= child_comment.created_at %><br>
+		<%= render partial: "shared/comment", locals: {comment: child_comment} %></li>
+  <% end %>
+</ul>
+<br>
